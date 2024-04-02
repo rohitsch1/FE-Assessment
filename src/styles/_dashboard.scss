@@ -8,7 +8,7 @@
   }
   
   .bar {
-    height: 3rem;
+    height: 4rem;
     @include flex(row ,flex-end );
     padding: 0 1rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.37);
@@ -24,7 +24,7 @@
 
   .widget-container {
     @include flex(row, space-between, stretch, 2rem);
-    padding: 2rem 2rem 2rem 0;
+    padding: 2rem 2rem ;
 
     .widget {
       width: 24rem;
@@ -71,7 +71,7 @@
 
   .graph-container {
     @include flex(row, unset, unset, 2rem);
-    padding: 0 2rem 2rem 0;
+    padding:  2rem 2rem ;
     > div {
       background-color: white;
       border-radius: 10px;
