@@ -1,21 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
+import Snackbar from '../components/SnackBar';
 
 const ConnectWalletButton = ({walletConnected, setWalletConnected}) => {
+  const [error, setError] = useState(null);
+
+  // removing the error Message After 3 sec
+  const handleCloseSnackbar = () => {
+    setError(null); 
+  };
 
   const connectWallet = async () => {
     try {
       if (window.ethereum) {
         await window.ethereum.request({ method: 'eth_requestAccounts' });
         setWalletConnected(true);
+        setError(null);
       } else {
-        console.error('MetaMask is not installed');
+        setError('MetaMask is not installed')
       }
     } catch (error) {
-      console.error('Error connecting to MetaMask:', error);
+      const msg = 'Error connecting to MetaMask:'+ error.message
+      setError(msg)
     }
   };
 
   return (
+    <>
     <button onClick={connectWallet} disabled={walletConnected}>
       {walletConnected ? (
         <>
@@ -25,6 +35,8 @@ const ConnectWalletButton = ({walletConnected, setWalletConnected}) => {
         'Connect MetaMask'
       )}
     </button>
+    {error && <Snackbar message={error}  onClose={handleCloseSnackbar}/>}
+    </>
   );
 };
 

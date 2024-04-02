@@ -199,3 +199,21 @@ a {
     transform: rotateZ(360deg);
   }
 }
+
+.snackbar {
+  position: fixed;
+  top: 20px; 
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ff4d4f;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.message {
+  font-size: 14px;
+}
+

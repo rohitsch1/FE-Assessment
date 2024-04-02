@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaRegBell } from "react-icons/fa";
 import AdminSidebar from "../components/AdminSidebar";
-import { BsSearch } from "react-icons/bs";
 import userImg from "../assets/userpic.png";
 import { LineChart } from "../components/Charts";
 import Cards from "./Cards";
@@ -40,13 +38,12 @@ const dashboard = () => {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchBitcoinPrices();
     fetchData();
-  },[])
+  }, []);
 
-
-  useEffect(()=>{
+  useEffect(() => {
     // Cheking at every change that metaMask is connected or not
     const handleAccountsChanged = (accounts) => {
       if (accounts.length > 0) {
@@ -56,13 +53,16 @@ const dashboard = () => {
       }
     };
 
-    window.ethereum.on('accountsChanged', handleAccountsChanged);
+    if (window.ethereum) {
+      window.ethereum.on("accountsChanged", handleAccountsChanged);
+    }
 
     return () => {
-      window.ethereum.off('accountsChanged', handleAccountsChanged);
+      if (window.ethereum) {
+        window.ethereum.off("accountsChanged", handleAccountsChanged);
+      }
     };
-    
-  },[])
+  }, []);
 
   return (
     <div className="admin-container">
